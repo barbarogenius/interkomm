@@ -1,0 +1,43 @@
+.TH "IKM" "8" "June 14 2011" "startx" "ikm"
+.SH "NAME"
+ikm \- command line utility for interkomm
+.SH "SYNOPSIS"
+.B ikm [options]
+
+.SH "DESCRIPTION"
+.LP 
+.B 
+ikm is the commandline frontend for interkomm.
+
+
+.SH "OPTIONS"
+\-\-create\-project 
+.I projectname
+.RS
+creates a new project
+.RE
+
+\-\-purge-project
+.I projectname	
+.RS
+removes a project ( WARNING: removes all files, too!)
+.RE
+
+
+.SH "ADVANCED OPTIONS"
+
+
+.SH "EXAMPLES"
+
+
+.SH "NOTES"
+
+projects names may only consist of alphanumeric characters and underscores.
+
+.SH "BUGS"
+
+
+.SH "AUTHORS"
+startx <startx@plentyfact.org>
+.PP 
+man page by startx

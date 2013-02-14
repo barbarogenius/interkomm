@@ -1,0 +1,34 @@
+#! /bin/sh
+# postinst script for interkomm
+
+# Move configuration file to current location, if an old one exists
+# and the init.d script configuration file was updated
+
+# Check for an account named 'ikm'
+if ! id ikm >/dev/null 2>&1; then
+    # Create the new system account
+    adduser --system --disabled-password --disabled-login --home /usr/share/ikm --no-create-home --group ikm
+fi
+
+# create the essential databases
+sqlite3 /var/lib/interkomm/db/scheduler.db "CREATE TABLE jobs ( time integer, project varchar, task varchar, status integer , uid varchar, priority integer default 1);"
+sqlite3 /var/lib/interkomm/db/user.db "CREATE TABLE user (password varchar(30), username varchar(30), realm varchar(30), projects varchar);"
+
+#we create the public pool ( previews )
+mkdir -p /var/lib/interkomm/public/system/pool
+touch /var/log/interkomm/production.log
+# finally permissions
+chown -R ikm:ikm /var/log/interkomm
+chown -R ikm:ikm /var/lib/interkomm
+chmod -R go+w /var/lib/interkomm/public/system
+chmod -R go+w /var/lib/interkomm/projects
+chmod -R go+w /var/lib/interkomm/db
+chmod -R go+w /var/lib/interkomm/db/scheduler.db
+
+echo -n "you need to run 'ikm --dev-setup' to set your admin password and finish installing interkomm."
+
+#DEBHELPER#
+
+exit 0
+
+

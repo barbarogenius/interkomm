@@ -1,0 +1,40 @@
+production:
+     project_dir: /var/lib/interkomm/projects/
+     log_dir: /var/log/interkomm/
+     utils: /home/startx/projects/interkomm/interkomm/trunk/utils/
+
+     tcpd:
+           port: 9999
+           bind: 127.0.0.1
+
+     eventd:
+           run_repair_on_startup: false
+
+     jobs:
+           concurrent_jobs: 1
+           wait: 10
+     
+     which_ffmpeg: /usr/bin/ffmpeg
+     use_mlt: false
+     which_melt: /usr/bin/melt
+
+test:
+     project_dir: /var/lib/interkomm/projects/
+     log_dir: /var/log/interkomm/
+     utils: /home/startx/projects/interkomm/interkomm/trunk/utils/     
+
+     tcpd:
+           port: 9999
+           bind: 127.0.0.1
+
+     eventd:
+           run_repair_on_startup: false
+
+     jobs:
+           concurrent_jobs: 1
+           wait: 10
+
+     which_ffmpeg: /usr/bin/ffmpeg
+     use_mlt: false
+     which_melt: /usr/bin/melt
+

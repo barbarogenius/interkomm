@@ -1,0 +1,72 @@
+#! /bin/sh
+### BEGIN INIT INFO
+# Provides:		memcached
+# Required-Start:	$remote_fs $syslog
+# Required-Stop:	$remote_fs $syslog
+# Should-Start:		$local_fs
+# Should-Stop:		$local_fs
+# Default-Start:	2 3 4 5
+# Default-Stop:		0 1 6
+# Short-Description:	Start memcached daemon
+# Description:		Start up memcached, a high-performance memory caching daemon
+### END INIT INFO
+
+
+PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+DAEMON=/usr/sbin/ikmd
+DAEMONBOOTSTRAP=/usr/sbin/ikm-start 
+NAME=ikmd
+DESC=ikmd
+PIDFILE=/var/run/$NAME.pid
+
+test -x $DAEMON || exit 0
+#test -x $DAEMONBOOTSTRAP || exit 0
+
+set -e
+
+. /lib/lsb/init-functions
+
+# Edit /etc/default/memcached to change this.
+
+test -r /etc/interkomm 
+
+case "$1" in
+  start)
+	echo -n "Starting ikmd ikm-worker ikmeventd: "
+	start-stop-daemon --chuid ikm:ikm --start --make-pidfile --pidfile /var/run/interkomm/ikmd.pid --quiet --background --exec /usr/sbin/ikmd 
+        start-stop-daemon --chuid ikm:ikm --start --make-pidfile --pidfile /var/run/interkomm/ikmeventd.pid --quiet --background --exec /usr/sbin/ikmeventd 
+        start-stop-daemon --chuid ikm:ikm --start --make-pidfile --pidfile /var/run/interkomm/ikmspd.pid --quiet --background --exec /usr/sbin/ikm-worker 
+        sleep 3
+        echo "$(pidof inotifywait)" > /var/run/interkomm/watch.pid
+	;;
+  stop)
+	echo -n "Stopping ikmd ikm-worker ikmeventd: "
+        killall ikmd ikmeventd ikm-worker inotifywait
+	rm -f /var/run/interkomm/*.pid
+        
+	;;
+
+  restart|force-reload)
+	#
+	#	If the "reload" option is implemented, move the "force-reload"
+	#	option to the "reload" entry above. If not, "force-reload" is
+	#	just the same as "restart".
+	#
+        killall ikmd ikmeventd ikm-worker inotifywait
+	echo -n "Restarting $DESC: "
+	rm -f $PIDFILE
+	sleep 1
+	start-stop-daemon --start --quiet --exec $DAEMONBOOTSTRAP 
+	echo "$NAME."
+	;;
+  status)
+	status_of_proc $DAEMON $NAME
+	;;
+  *)
+	N=/etc/init.d/$NAME
+	echo "Usage: $N {start|stop|restart|force-reload|status}" >&2
+	exit 1
+	;;
+esac
+
+exit 0

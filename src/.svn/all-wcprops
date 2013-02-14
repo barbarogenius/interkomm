@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 43
+/interkomm/!svn/ver/273/interkomm/trunk/src
+END
+ikmd
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/interkomm/!svn/ver/272/interkomm/trunk/src/ikmd
+END
+ikmeventd
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/interkomm/!svn/ver/272/interkomm/trunk/src/ikmeventd
+END
+ikm-worker
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/interkomm/!svn/ver/272/interkomm/trunk/src/ikm-worker
+END
+interkomm.init
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/interkomm/!svn/ver/234/interkomm/trunk/src/interkomm.init
+END
+bootstrap.lua
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/interkomm/!svn/ver/273/interkomm/trunk/src/bootstrap.lua
+END
+ikm
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/interkomm/!svn/ver/273/interkomm/trunk/src/ikm
+END

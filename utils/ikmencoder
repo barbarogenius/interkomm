@@ -1,0 +1,54 @@
+#!/usr/bin/lua
+
+local status,err = pcall(
+  function()
+    dofile '/etc/interkomm/bootstrap.lua'
+  end )
+  if not status then
+    dofile '../src/bootstrap.lua'
+  end
+
+
+require 'ikm'
+
+os.execute("sleep 10")
+
+local function help()
+
+local out = [[
+ikmencoder version 0.1 (c) startx@plentyfact.org GPLv3
+usage: ikmencoder [options]
+-m   <inputfile> print Mb/s of a file
+-i   <inputfile> input file
+-t   <target>    target vertical resolution (240,360,480)
+-e   add vertical resolution to output filename
+-q   quiet , no output whatsoever
+]]
+
+print(out)
+
+end
+
+
+
+    if arg[1] == "-h" then
+       help()
+       os.exit()
+    end
+
+    if arg[1] == "-m" then
+       print(ikm.lcoder.size_per_min(arg[2]))
+       os.exit()
+    end
+
+
+  local opt_filename, opt_target, opt_extension = ikm.lcoder.getopt(arg)
+    if not opt_filename or not opt_target then
+       io.write("Missing file or unknown option.\n")
+       os.exit()
+    end
+
+
+  local run, err = ikm.lcoder.tasks(opt_filename, opt_target, opt_extension)
+
+

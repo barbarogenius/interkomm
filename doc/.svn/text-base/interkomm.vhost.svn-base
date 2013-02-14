@@ -1,0 +1,55 @@
+<VirtualHost *:80>
+        ServerName interkomm.local
+
+        DocumentRoot /var/lib/interkomm/public
+        DirectoryIndex dispatch.lua index.html
+
+        IdleTimeout 60
+        IPCCommTimeout 180
+        DefaultMinClassProcessCount 2
+
+        CustomLog /var/log/apache2/ikm.log combined
+        ErrorDocument 401 /404.html
+        ErrorDocument 404 /404.html
+
+        
+        RewriteEngine On
+        RewriteCond %{REQUEST_URI} !^/(img|system|stylesheets|js)/     [NC]
+        
+        #RewriteRule ^/(.*)/$                   /dispatch.lua?project=$1 [PT]
+        RewriteRule ^/admin/(.*)$             /dispatch.lua?project=admin&action=$1 [PT]
+        RewriteRule ^/project/(.*)$           /dispatch.lua?project=$1 [PT]
+        RewriteRule ^/project/(.*)/video/(.*)$ /dispatch.lua?project=$1&video=$2 [PT]
+
+
+        <Directory /var/lib/interkomm/public>
+          Options Indexes FollowSymLinks MultiViews ExecCGI
+          AllowOverride None
+          Order allow,deny
+          allow from all
+          AddHandler fcgid-script .lua
+          FCGIWrapper /usr/bin/wsapi.fcgi .lua
+        </Directory>
+
+        DBDriver sqlite3
+        DBDParams "/var/lib/interkomm/db/user.db"
+        DBDMin  1
+        DBDKeep 2
+        DBDMax  10
+        DBDExptime 60
+
+        ErrorLog /var/log/apache2/ikm-error.log
+
+        <Location "/">
+         AuthType Digest
+         AuthName interkomm
+         AuthDigestProvider dbd
+         Require valid-user
+         AuthDBDUserRealmQuery "Select password FROM user WHERE username=%s and realm=%s"
+        </Location>
+
+
+
+
+</VirtualHost>
+

@@ -1,0 +1,29 @@
+#! /bin/sh
+# postrm script for interkomm
+
+set -e
+
+case "$1" in
+    purge)
+	rm -rf /var/log/interkomm
+
+	if id ikm >/dev/null 2>&1; then
+	    deluser ikm
+	fi
+
+	# Remove group only if empty
+	if getent group ikm | awk -F: ' { print $4 } ' | egrep -cq '^$'; then
+	    groupdel ikm
+	fi
+	;;
+    remove|upgrade|failed-upgrade|abort-install|abort-upgrade|disappear)
+
+	;;
+    *)
+	echo "postrm called with unknown argument \`$1'" >&2
+	exit 1
+esac
+
+#DEBHELPER#
+
+exit 0

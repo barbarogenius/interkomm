@@ -1,0 +1,3 @@
+-- this is the preview rule file
+
+ikm.db.add_job("dummy", item)

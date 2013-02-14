@@ -1,0 +1,7 @@
+production:
+     modules_enabled:
+          - mediainfo
+          - cutter
+          - audioexport
+          - produce
+          - http_upload

@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 43
+/interkomm/!svn/ver/254/interkomm/trunk/doc
+END
+vhost.example
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/interkomm/!svn/ver/89/interkomm/trunk/doc/vhost.example
+END
+ikm.8
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/interkomm/!svn/ver/174/interkomm/trunk/doc/ikm.8
+END
+interkomm.vhost
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/interkomm/!svn/ver/182/interkomm/trunk/doc/interkomm.vhost
+END

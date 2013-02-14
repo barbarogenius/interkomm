@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/interkomm/!svn/ver/266/interkomm/trunk/app/views/layouts/common
+END
+_footer.tpl
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/interkomm/!svn/ver/130/interkomm/trunk/app/views/layouts/common/_footer.tpl
+END
+_topbar.tpl
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/interkomm/!svn/ver/197/interkomm/trunk/app/views/layouts/common/_topbar.tpl
+END
+_header.tpl
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/interkomm/!svn/ver/266/interkomm/trunk/app/views/layouts/common/_header.tpl
+END
+_login.tpl
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/interkomm/!svn/ver/131/interkomm/trunk/app/views/layouts/common/_login.tpl
+END

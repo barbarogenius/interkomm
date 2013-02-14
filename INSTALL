@@ -1,0 +1,64 @@
+Installing the interkomm development version
+================================================
+
+This INSTALL document descibes the install for debian squeeze (stable)
+
+Step 1: getting interkomm and ffmpeg:
+--------------------------------------
+add the plentyfact and the debian multimedia repositories to your /etc/apt/sources.list
+
+deb http://packages.plentyfact.org/debian/ experimental/
+deb http://www.debian-multimedia.org squeeze main
+
+# apt-get update
+# apt-get install interkomm ffmpeg
+
+
+Step 2: set up the UI (width apache2)
+--------------------------------------
+
+an example apache2 vhost can be found at:
+
+/usr/share/doc/interkomm/example.vhost
+
+cp the file to your /etc/apache/sites-available/ directory
+and adjust settings if needed ( such as IP and/or server name ) 
+
+run the following to make sure all necessary modules are available
+
+# a2enmod fcgid
+# a2enmod rewrite
+# a2enmod auth_digest
+# a2enmod authn_dbd
+
+check if everything is ok with
+
+# apache2ctl -t
+
+after this restart apache
+
+# apache2ctl restart
+
+Step 3: dev configuration 
+--------------------------------------
+
+run as root
+
+# ikm --dev-setup
+
+you will be asked to enter a name for a first project and your global admin password
+
+now run:
+
+# /etc/init.d/interkomm start
+
+this might take 2 or 3 seconds to start, after that, the following processes 
+should be running:
+
+ikmd , ikmeventd, ikm-worker (twice) , inotifywait
+
+now open the UI in your browser and login with "admin" and the password you have set.
+
+
+
+

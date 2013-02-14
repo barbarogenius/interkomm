@@ -1,0 +1,13 @@
+Package: interkomm
+Version: 0.4.6.3
+Section: util
+Priority: optional
+Architecture: i386
+Essential: no
+Depends: lua5.1, sqlite3, libyaml-0-2, liblua5.1-filesystem0, liblua5.1-cosmo0, liblua5.1-sql-sqlite3-2, liblua5.1-posix1, liblua5.1-socket2, liblua5.1-copas0, liblua5.1-logging, liblua5.1-json, liblua5.1-md5-0 , inotify-tools, psmisc
+Recommends: liblua5.1-wsapi-fcgi-1, apache2, libapache2-mod-fcgid
+Installed-Size: 550
+Maintainer: startx <startx@plentyfact.org>
+Provides: interkomm
+Description: toolkit for collaborative video work
+

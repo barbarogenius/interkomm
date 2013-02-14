@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/interkomm/!svn/ver/272/interkomm/trunk/app/models
+END
+items.lua
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/interkomm/!svn/ver/272/interkomm/trunk/app/models/items.lua
+END
+search.lua
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/interkomm/!svn/ver/120/interkomm/trunk/app/models/search.lua
+END
+notification.lua
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/interkomm/!svn/ver/272/interkomm/trunk/app/models/notification.lua
+END

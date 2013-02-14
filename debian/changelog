@@ -1,0 +1,12 @@
+0.4.1
+
+- new daemons ( ikmspd )
+
+0.4 "all things must pass"
+
+- refactoring most of the libraries, re-organising the repository
+
+0.3 "a christmas present"
+
+- adding core files and early library version
+- first skeleton for debian packaging

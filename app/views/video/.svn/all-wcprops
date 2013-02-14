@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/interkomm/!svn/ver/270/interkomm/trunk/app/views/video
+END
+_videoinfo.tpl
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/interkomm/!svn/ver/269/interkomm/trunk/app/views/video/_videoinfo.tpl
+END
+_videoplayer.tpl
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/interkomm/!svn/ver/270/interkomm/trunk/app/views/video/_videoplayer.tpl
+END

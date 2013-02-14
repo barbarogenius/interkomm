@@ -1,0 +1,25 @@
+This package was debianized by startx <startx@plentyfact.org>
+
+It was written specifically for Debian GNU/Linux.
+
+Authors: 	
+
+	startx	 startx@plentyfact.org
+	
+
+Copyright:
+
+	Copyright (c) 2009 by startx  <startx@plentyfact.org>
+
+	This program is free software; you can redistribute it and/or
+	modify it under the terms of the GNU General Public License
+	as published by the Free Software Foundation; either version 3
+	of the License, or (at your option) any later version.
+
+	This program is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	GNU General Public License for more details.
+
+A copy of the GNU General Public License is available on Debian-based 
+systems as /usr/share/common-licenses/GPL.

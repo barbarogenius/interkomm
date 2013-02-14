@@ -1,0 +1,149 @@
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/interkomm/!svn/ver/275/interkomm/trunk/lib/ikm
+END
+ffwrap.lua
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/interkomm/!svn/ver/270/interkomm/trunk/lib/ikm/ffwrap.lua
+END
+db.lua
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/interkomm/!svn/ver/272/interkomm/trunk/lib/ikm/db.lua
+END
+debug.lua
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/interkomm/!svn/ver/252/interkomm/trunk/lib/ikm/debug.lua
+END
+core.lua
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/interkomm/!svn/ver/257/interkomm/trunk/lib/ikm/core.lua
+END
+cmml.lua
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/interkomm/!svn/ver/252/interkomm/trunk/lib/ikm/cmml.lua
+END
+tcpd.lua
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/interkomm/!svn/ver/212/interkomm/trunk/lib/ikm/tcpd.lua
+END
+spool.lua
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/interkomm/!svn/ver/244/interkomm/trunk/lib/ikm/spool.lua
+END
+authdigest.lua
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/interkomm/!svn/ver/200/interkomm/trunk/lib/ikm/authdigest.lua
+END
+audio.lua
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/interkomm/!svn/ver/203/interkomm/trunk/lib/ikm/audio.lua
+END
+sendemail.lua
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/interkomm/!svn/ver/68/interkomm/trunk/lib/ikm/sendemail.lua
+END
+getopt.lua
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/interkomm/!svn/ver/77/interkomm/trunk/lib/ikm/getopt.lua
+END
+task.lua
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/interkomm/!svn/ver/272/interkomm/trunk/lib/ikm/task.lua
+END
+html.lua
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/interkomm/!svn/ver/246/interkomm/trunk/lib/ikm/html.lua
+END
+procc.lua
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/interkomm/!svn/ver/28/interkomm/trunk/lib/ikm/procc.lua
+END
+project.lua
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/interkomm/!svn/ver/269/interkomm/trunk/lib/ikm/project.lua
+END
+minimagick.lua
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/interkomm/!svn/ver/200/interkomm/trunk/lib/ikm/minimagick.lua
+END
+lcoder.lua
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/interkomm/!svn/ver/207/interkomm/trunk/lib/ikm/lcoder.lua
+END
+job.lua
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/interkomm/!svn/ver/252/interkomm/trunk/lib/ikm/job.lua
+END
+crc32.lua
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/interkomm/!svn/ver/77/interkomm/trunk/lib/ikm/crc32.lua
+END
+ui.lua
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/interkomm/!svn/ver/252/interkomm/trunk/lib/ikm/ui.lua
+END
+util.lua
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/interkomm/!svn/ver/253/interkomm/trunk/lib/ikm/util.lua
+END
+user.lua
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/interkomm/!svn/ver/252/interkomm/trunk/lib/ikm/user.lua
+END
+media.lua
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/interkomm/!svn/ver/264/interkomm/trunk/lib/ikm/media.lua
+END
+event.lua
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/interkomm/!svn/ver/275/interkomm/trunk/lib/ikm/event.lua
+END

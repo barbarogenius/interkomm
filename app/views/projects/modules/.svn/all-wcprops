@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/interkomm/!svn/ver/270/interkomm/trunk/app/views/projects/modules
+END
+_mod_http_upload.tpl
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/interkomm/!svn/ver/270/interkomm/trunk/app/views/projects/modules/_mod_http_upload.tpl
+END
+_mod_xml_upload.tpl
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/interkomm/!svn/ver/270/interkomm/trunk/app/views/projects/modules/_mod_xml_upload.tpl
+END

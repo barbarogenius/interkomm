@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/interkomm/!svn/ver/276/interkomm/trunk/debian
+END
+control
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/interkomm/!svn/ver/276/interkomm/trunk/debian/control
+END
+postinst
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/interkomm/!svn/ver/239/interkomm/trunk/debian/postinst
+END
+postrm
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/interkomm/!svn/ver/67/interkomm/trunk/debian/postrm
+END
+changelog
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/interkomm/!svn/ver/83/interkomm/trunk/debian/changelog
+END
+copyright
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/interkomm/!svn/ver/15/interkomm/trunk/debian/copyright
+END

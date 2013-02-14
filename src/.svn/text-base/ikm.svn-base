@@ -1,0 +1,383 @@
+#!/usr/bin/lua
+
+--[[
+
+
+Copyright (C) 2009-2011 startx <startx@plentyfact.org>
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 3
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License along
+with this program; if not, write to the Free Software Foundation, Inc.,
+51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+http://www.gnu.org/copyleft/gpl.html
+
+version 0.4.6.3
+
+--]]
+
+local status,err = pcall(
+  function()
+    dofile '/etc/interkomm/bootstrap.lua'
+  end )
+  if not status then
+    os.exit()
+  end
+
+require 'ikm'
+
+------
+--
+--
+local function usage()
+  local usage = [[
+  interkomm 0.4.6.2
+  usage:
+    basic commands:
+    --create-project <project>        create a new project
+    --purge-project <project>         completely purge a project (WARNING: removes all files, too!)
+    --create-user <username> <passwd> create a useraccount with password <passwd>
+    --remove-user <username>          remove a user account
+    --change-password <username> <passwd> change password for a user account
+    --lastlog                         shows the latest log entries
+    --list-projects                   lists all projects found in the filesystem   
+    --list-jobs                       list the recent job queue
+
+    extended commands
+    --project -p <project>            specify the project to work on
+                 --action -a <action>
+                 available actions:
+                   adduser -u <username>   add a user to the project
+                   deluser -u <username>   remove a user from the project
+                   members                 list all members of a project
+                   generate-overview       (re-)generates the preview infos/pages ( currently broken )
+                   analyze                  compares the filesystem for any discrepency between database and filesystem
+                   repair                   will attempt to repair the discrepency between database and filesystem
+                                          ( ikmd needs to run to do that )
+                   stats                   returns number of videos ( in the database) and overall size
+                   backupdb                dumps a snapshot of the files database (experimental)
+
+
+    --job -j  <job_id>                specify a job to work on
+                 available actions: 
+                   -a cancel|open     cancels or (re)-opens a job in the job queue
+                                      use " --list-jobs" before to find out what ID a job has
+
+    --user -u <username>              used with project
+    --file -f <filename>              (currently unused)
+    --item -i <uid>                   (currently unused)
+  ]]
+  io.write(usage)
+end
+
+
+------
+--
+--
+local function error(error_message)
+  io.write(error_message.."\n")
+  os.exit()
+end
+
+
+
+
+------ BASIC OPTIONS
+--
+--
+--
+--
+if arg[1] == nil then
+  usage()
+  os.exit()
+end
+
+-- creating a new project in the filesystem
+
+
+if arg[1] == "--create-project" then
+   ikm.project.create(arg[2])
+   os.exit()
+end
+
+if arg[1] == "--lastlog" then
+   os.execute("tail -100 /var/log/interkomm/production.log")
+   os.exit()
+end
+
+if arg[1] == "--test-config" then
+   ikm.debug.showtable(CONFIG)
+   os.exit()
+end
+
+
+if arg[1] == "--create-user" then
+   ikm.user.create(arg[2], arg[3])
+   os.exit()
+end
+
+if arg[1] == "--remove-user" then
+   ikm.user.remove(arg[2])
+   os.exit()
+end
+
+if arg[1] == "--change-password" then
+   if not arg[2] or not arg[3] then
+   io.write("this requires two options.\n")
+   else
+   ikm.user.update_password(arg[2], arg[3])
+   end
+   os.exit()
+  
+end
+
+if arg[1] == "--list-projects" then
+   local projects_t = ikm.project.find_projects("/var/lib/interkomm/projects/")
+     ikm.debug.showtable(projects_t)
+     os.exit()
+end
+
+-- purging a project
+-- TODO: add confimation dialogue
+if arg[1] == "--purge-project" then
+   local err = ikm.core.stdout("rm -Rf /var/lib/interkomm/projects/"..arg[2])
+   if err then
+      io.write(err.."\n")
+   end
+   os.exit()
+end
+
+if arg[1] == "--list-jobs" then
+
+   local result = ikm.job.show(nil, 10)
+
+    if result then
+    for _, set in ipairs(result) do
+       local task = json.decode(set.task)
+       io.write(set.rowid.." "..ikm.project.get_project_from_path(task.path)..":"..ikm.media.get_filename(task.path).." ".. task.type.." ["..ikm.job.STATUS[tonumber(set.status)].."]\n")
+    end
+    os.exit()
+end
+
+
+end
+
+
+if arg[1] == "--dev-setup" then
+   ikm.task.dev_setup()
+   io.write("dev environment is set up.\n")
+   os.exit()
+end
+
+
+------ PROJECT OPTIONS
+--
+--
+--
+-- options
+local long_opts = {
+   project = "p",
+   action = "a",
+   file = "f",
+   item = "i",
+   version = "v",
+   user    = "u",
+   job     = "j",
+   help    = "h",
+}
+
+-- alt getopt
+local optarg, optind = ikm.getopt.get_opts (arg, "p:a:f:i:v:u:j:h", long_opts)
+
+
+-- option parsing
+--
+--
+if optarg.h then
+  usage()
+else
+
+-- we get the project to work on
+
+local project, action, file
+
+
+--- work on a project
+if arg[1] == "-p" or arg[1] == "--project" then
+
+   -- required: project
+   if optarg.p then
+      project = optarg.p
+        -- TODO task
+        if optarg.p ~= "admin" then               
+        if not ikm.task.project_exists(project) then
+           error("the project "..project.." does not exist.")
+        end
+        end
+
+   else 
+      print("you need to specify the project to work on.")
+      os.exit()
+   end
+  
+
+   -- required: action
+   if optarg.a then
+     action = optarg.a
+   else
+     print("you need to specify an action.")
+     os.exit()
+   end
+
+   -- optional: file
+   file = optarg.f
+   user = optarg.u   
+
+  local action_switch = ikm.core.switch {
+
+  ---
+  --
+  -- TODO html
+  ["generate-pages"] = function (x)
+         io.write("generating overview for "..project.."...\n")
+         io.write("generating viewpages for "..project.."...\n")
+         
+         end ,
+
+  ---
+  --
+  -- OBSOLETE
+  ["analyze"] = function (x)
+         io.write("report for project "..project..":\n------------------------------\n")
+         ikm.task.discover(project)
+         end,
+
+  ["repair"] = function (x)
+         io.write("attempting to repair project "..project..":\n------------------------------\n")
+         ikm.task.discover(project, "repair")
+         end,
+
+
+
+  ["adduser"] = function(x)
+        if not user then
+        io.write("you must specify a username.\n")
+        else 
+        ikm.project.adduser(project, user)
+        io.write("added user "..user.." to project "..project..".\n")
+        end
+
+       end,
+
+   ["deluser"] = function(x)
+        if not user then
+        io.write("you must specify a username.\n")
+        else
+        ikm.project.deluser(project, user)
+        io.write("removed user "..user.." from project "..project..".\n")
+        end
+
+       end,
+
+   ["members"] = function(x)
+        local members = table.concat(ikm.project.list_members(optarg.p), " ")
+        io.write(optarg.p.." : "..members.."\n")
+       end,   
+
+   ["stats"] = function(x)
+         local stats = ikm.project.videostats(project)
+         if stats then
+           local psize = ikm.core.round( stats.size_all / 1024 / 1024 , 2 )
+           io.write(project.." : "..stats.count.." videos , "..psize.."MB \n")
+         end
+       end,
+
+   ["backupdb"] = function(x)
+          local dump = ikm.db.backup_filesdb(project)
+          io.write("database for project "..project.." has been dumped to "..dump..".\n")
+          os.exit()     
+          end,
+
+   ---
+   --
+   --
+   default = function(x)
+            error("unknown action. see ikm -h vor more info.")
+         end,
+
+ }
+
+  -- the actual switch
+  action_switch:case(action)
+
+os.exit()
+end -- END OF PROJECT
+
+
+
+
+
+if arg[1] == "-j" or arg[1] == "--job" then
+
+  -- required: project
+   if optarg.j then
+      job = optarg.j
+        -- TODO task
+   else
+      print("you need to specify the job.")
+      os.exit()
+   end
+
+   -- required: action
+   if optarg.a then
+     action = optarg.a
+   else
+     print("you need to specify an action.")
+     os.exit()
+   end
+
+
+   local action_switch = ikm.core.switch {
+
+
+   ['cancel'] = function (x)
+                ikm.job.set(job, 4)
+                io.write("cancelling job "..job..".\n")
+                os.exit()
+                end,  
+
+   ['open'] = function (x)
+                ikm.job.set(job, 0)
+                io.write("re-open job "..job..".\n")
+                os.exit()
+                end,
+
+   ---
+   --
+   --
+   default = function(x)
+            error("unknown action. see ikm -h vor more info.")
+         end,
+   }
+
+   -- the actual switch
+   action_switch:case(action)
+
+
+
+os.exit()
+end -- END OF JOBS
+
+   
+
+
+os.exit()
+end

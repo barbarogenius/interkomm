@@ -1,0 +1,28 @@
+<VirtualHost 127.0.0.1:80>
+        ServerAdmin webmaster@localhost
+
+        ServerName interkomm.local
+        DocumentRoot /var/lib/interkomm/public
+        DirectoryIndex dispatch.lua index.html
+
+        IdleTimeout 60
+        IPCCommTimeout 180
+        DefaultMinClassProcessCount 1
+
+        CustomLog /var/log/apache2/ikm.log combined
+
+        RewriteEngine On
+        RewriteRule ^/(.*)/video/(.*)         /$1/video/$2.html [PT]
+        AliasMatch ^/(.*)/video/(.*).html$ /var/lib/interkomm/projects/$1/public/video/$2.html        
+
+        <Directory /var/lib/interkomm/public>
+        Options Indexes FollowSymLinks MultiViews ExecCGI
+        AllowOverride None
+        Order allow,deny
+        allow from all
+        AddHandler fcgid-script .lua
+        FCGIWrapper /usr/bin/wsapi.fcgi .lua
+        </Directory>
+
+</VirtualHost>
+

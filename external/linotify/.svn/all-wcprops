@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/interkomm/!svn/ver/180/interkomm/trunk/external/linotify
+END
+COPYRIGHT
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/interkomm/!svn/ver/178/interkomm/trunk/external/linotify/COPYRIGHT
+END
+Makefile
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/interkomm/!svn/ver/178/interkomm/trunk/external/linotify/Makefile
+END
+linotify.c
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/interkomm/!svn/ver/178/interkomm/trunk/external/linotify/linotify.c
+END
